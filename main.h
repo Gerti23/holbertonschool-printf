@@ -18,6 +18,7 @@ int _putchar(char c);
 int pr_char(va_list char_list);
 int pr_int(va_list int_list);
 int pr_string(va_list string_list);
+int _strlen(char *s);
 
 int _printf(const char *format, ...);
 

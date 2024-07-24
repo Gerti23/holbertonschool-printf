@@ -1,59 +1,72 @@
-#include "main.h"
 #include <stdarg.h>
-#include <stdlib.h>
+#include <unistd.h>
+#include "main.h"
 
+/**
+ * _printf - Produces output according to a format
+ * @format: Character string composed of zero or more directives
+ *
+ * Return: The number of characters printed (excluding the null byte)
+ */
 int _printf(const char *format, ...)
 {
-    va_list arg_list;
-    int j, i = 0, len = 0;
+    va_list args;
+    int i = 0, count = 0;
+    char *str;
+    char ch;
 
-    print_data p_func[] = {
-        {"c", pr_char},
-        {"s", pr_string},
-        {NULL, NULL}
-    };
+    if (!format)
+        return (-1);
 
-    va_start(arg_list, format);
-
-    if (format == NULL)
-        return (0);
-    
-    while (format != NULL && format[i] != '\0') {
-        if (format[i] == '%' && format[i+1] != '%') 
+    va_start(args, format);
+    while (format && format[i])
+    {
+        if (format[i] == '%')
         {
-            j = 0;
-            while (p_func[j].type != NULL)
+            i++;
+            switch (format[i])
             {
-                if (format[i+1] == p_func[j].type[0])
-                {
-                    len += p_func[j].print(arg_list);
-                    i++;
-                }
-                j++;
+                case 'c':
+                    ch = (char) va_arg(args, int);
+                    count += write(1, &ch, 1);
+                    break;
+                case 's':
+                    str = va_arg(args, char *);
+                    if (str)
+                        count += write(1, str, _strlen(str));
+                    else
+                        count += write(1, "(null)", 6);
+                    break;
+                case '%':
+                    count += write(1, "%", 1);
+                    break;
+                default:
+                    count += write(1, "%", 1);
+                    count += write(1, &format[i], 1);
+                    break;
             }
         }
-        else if (format[i] == '%' && format[i+1] == '%')
+        else
         {
-            _putchar('%');
-            len += 1;
-            i++;
-        }
-        else 
-        {
-            _putchar(format[i]);
-            len += 1;
+            count += write(1, &format[i], 1);
         }
         i++;
-
     }
-
-    va_end(arg_list);
-    return (len);    
+    va_end(args);
+    return (count);
 }
 
-int main(void)
+/**
+ * _strlen - Returns the length of a string
+ * @s: The string to measure
+ *
+ * Return: The length of the string
+ */
+int _strlen(char *s)
 {
-    _printf("This is it %s", "Hello World\n");
+    int len = 0;
 
-    return (0);
+    while (s[len])
+        len++;
+    return (len);
 }
