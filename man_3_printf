@@ -1,4 +1,4 @@
-.TH man 3 "22 November 2023" "2.2.0" "_printf man page"
+.TH PRINTF 3 "July 2024" "Holberton School" "Custom Library Functions"
 .SH NAME
 .B _printf
 - Prints formatted data
@@ -38,3 +38,4 @@ _printf("%s, %s %d, \n", name, last_name, age);
 .SH BUGS
 No detected bugs.
 .SH AUTHOR
+Gerti Bajo and Hans Sora

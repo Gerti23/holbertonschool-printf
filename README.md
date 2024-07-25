@@ -25,7 +25,7 @@ The print_string function is used to print strings in the _printf function. The 
 Compilation
 To use this function, you need to clone this repository and compile the source files with gcc. For example:
 
-  git clone https://github.com/Ferlandoo/holbertonschool-printf.git
+  git clone https://github.com/Gerti23/holbertonschool-printf.git
   gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format *.c
 You might want to look at the gcc flag -Wno-format when testing with your _printf and the standard printf.
 
@@ -71,3 +71,5 @@ functions.c	Contains char, string, decimal and integer functions.
 get_functions.c	Function that check format and call another function it format match with character.
 _putchar.c	Custom putchar function.
 Authors
+Gerti23
+Hans Sora
