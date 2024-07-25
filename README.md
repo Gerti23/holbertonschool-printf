@@ -1,9 +1,10 @@
-C - PRINTF (Holberton School)
+****C - PRINTF ****
+(Holberton School)
  _printf() function format string is a character string, beginning and ending in its initial shift state, if any. These arguments are placed using the percentage '%' operator.
 
 This project is a custom implementation of the printf function in C. It can print various data types, such as characters, strings, integers and decimals.
 
-Learning Objectives
+**Learning Objectives**
 The primary learning objectives of this project include:
 
 Understanding data structures (array of structs) and algorithms required to implement the _printf function.
@@ -11,25 +12,26 @@ Using pointers to functions to handle different conversion specifiers.
 Implementing basic functionality for %s conversion specifier to print strings.
 Gaining knowledge of the main program flow and control structures.
 Distributing the workload among team members and collaborating effectively on the project.
-Structure and Algorithm
+
+**Structure and Algorithm**
 The _printf function is implemented in the _printf.c file. The function takes a format string and a variable number of arguments. The format string is a character string, beginning and ending in its initial shift state, if any. These arguments are placed using the percentage % operator.
 
 The function uses an array of structs to store the conversion specifiers and their corresponding functions. The function then iterates through the format string and calls the appropriate function for each conversion specifier.
 
-Array of Struct with Pointers to Function
+**Array of Struct with Pointers to Function**
 The array of structs used in the _printf function is defined in the main.h header file. Each struct contains a character representing the conversion specifier and a pointer to the corresponding function. For example, the struct for the %s conversion specifier contains the character s and a pointer to the print_string function.
 
-Basic %s Function
+**Basic %s Function**
 The print_string function is used to print strings in the _printf function. The function takes a string as an argument and prints it to stdout using the _putchar function.
 
-Compilation
+**Compilation**
 To use this function, you need to clone this repository and compile the source files with gcc. For example:
 
   git clone https://github.com/Gerti23/holbertonschool-printf.git
   gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format *.c
 You might want to look at the gcc flag -Wno-format when testing with your _printf and the standard printf.
 
-Use & Examples
+**Use & Examples**
 To use the function, you need to include the header file “main.h” in your source code and call the function with the following prototype:
 
 int _printf(const char *format, ...);
@@ -62,7 +64,8 @@ int main(void)
     _printf("This is a decimal: %.2f\n", d); /* prints "This is a decimal: 3.14" */
     return (0);
 }
-Files contained in this repository
+
+**Files contained in this repository**
 Name	Information
 man_3_printf	Man page of the _printf() function.
 main.h	Header file with the data type struct, standard libraries and custom prototypes.
@@ -70,6 +73,7 @@ printf.c	Main printf function file. Calls other functions.
 functions.c	Contains char, string, decimal and integer functions.
 get_functions.c	Function that check format and call another function it format match with character.
 _putchar.c	Custom putchar function.
-Authors
+
+**Authors**
 Gerti23
 Hans Sora
