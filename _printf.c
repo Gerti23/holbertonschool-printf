@@ -1,49 +1,72 @@
-#include "main.h"
 #include <stdarg.h>
-#include <stdlib.h>
+#include <unistd.h>
+#include "main.h"
+
 /**
- * _printf - A function that prints everything
- * @format: pointer to constant char
- * @...: Second operand other args
- * Return: Return an int or 0
+ * _printf - Produces output according to a format
+ * @format: Character string composed of zero or more directives
+ *
+ * Return: The number of characters printed (excluding the null byte)
  */
 int _printf(const char *format, ...)
 {
-	va_list ag_list;
-	int i, j, flag, len = 0;
-	print_data p_func[] = {
-		{"s", pr_string},
-		{"c", pr_char},
-		{"i", pr_int},
-		{"d", pr_decimal},
-		{NULL, NULL}
-	};
+    va_list args;
+    int i = 0, count = 0;
+    char ch;
+    char *str;
 
-	va_start(ag_list, format);
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-		 return (0);
-	i = 0;
-	
-	while (format != NULL && format[i] != '\0')
-	{
-		if (format[i] == '%' && format[i + 1] != '%')
-		{
-			j = 0, flag = 0;
-			while (p_func[j].type != NULL)
-			{
-				if (format[i + 1] == p_func[j].type[0])
-					len = len + p_func[j].print(ag_list), flag = 1,	i++;
-				j++;
-			}
-			if (flag == 0)
-				_putchar(format[i]), len += 1;
-		}
-		else if (format[i] == '%' && format[i + 1] == '%')
-			_putchar('%'), i++, len += 1;
-		else
-			_putchar(format[i]), len += 1;
-		i++;
-	}
-	va_end(ag_list);
-	return (len);
+    if (!format)
+        return (-1);
+
+    va_start(args, format);
+    while (format[i])
+    {
+        if (format[i] == '%')
+        {
+            i++;
+            switch (format[i])
+            {
+                case 'c':
+                    ch = (char) va_arg(args, int);
+                    count += write(1, &ch, 1);
+                    break;
+                case 's':
+                    str = va_arg(args, char *);
+                    if (str)
+                        count += write(1, str, _strlen(str));
+                    else
+                        count += write(1, "(null)", 6);
+                    break;
+                case '%':
+                    count += write(1, "%", 1);
+                    break;
+                default:
+                    count += write(1, "%", 1);
+                    count += write(1, &format[i], 1);
+                    break;
+            }
+        }
+        else
+        {
+            count += write(1, &format[i], 1);
+        }
+        i++;
+    }
+    va_end(args);
+    return (count);
+}
+
+/**
+ * _strlen - Returns the length of a string
+ * @s: The string to measure
+ *
+ * Return: The length of the string
+ */
+int _strlen(const char *s)
+{
+    int len = 0;
+
+    while (s[len])
+        len++;
+    return (len);
 }

@@ -1,125 +1,139 @@
-#include "main.h"
-#include <stdarg.h>
 #include <stdlib.h>
+#include <stdarg.h>
+#include "main.h"
+
 /**
- * pr_char - Function that prints a char
- * @char_list: First operand a va list
- * Return: Returns an int or 0
+ * p_char - prints character c
+ * @arg: character to print
+ * Return: number of characters printed
  */
-int pr_char(va_list char_list)
+int p_char(va_list arg)
 {
-	char c;
+  char c;
 
-	c = va_arg(char_list, int);
-	_putchar(c);
+  c = va_arg(arg, int);
 
-	return (1);
+  _putchar(c);
+
+  return (1);
 }
+
 /**
- * pr_string - Function that printg string
- * @string_list: First operand a va list
- * Return: Returns an int or 0
+ * p_str - prints string s
+ * @arg: string to print
+ * Return: number of characters printed
  */
-int pr_string(va_list string_list)
+int p_str(va_list arg)
 {
-	char *s;
-	int i;
+  unsigned int i;
+  char *s;
 
-	s = va_arg(string_list, char*);
-	if (s == NULL)
-		s = "(null)";
-	for (i = 0; s[i] != '\0'; i++)
-		_putchar(s[i]);
+  s = va_arg(arg, char *);
 
-	return (i);
+  i = 0;
+
+  if (s == NULL)
+    s = "(null)";
+
+  while (s[i] != '\0')
+    {
+      _putchar(s[i]);
+      i++;
+    }
+
+  return (i);
 }
+
 /**
- * pr_decimal - Function that prints decimal numbers
- * @decimal_list: First operand a va list
- * Return: Returns an int or 0
+ * p_dec - prints decimal
+ * @arg: argument to print
+ * Return: number of characters printed
  */
-int pr_decimal(va_list decimal_list)
+int p_dec(va_list arg)
 {
-	int n = va_arg(decimal_list, int);
-	int last = n % 10;
-	int expo = 1;
-	int i = 1;
-	int num;
-	int dig;
+  int n = va_arg(arg, int);
+  int num;
+  int last = n % 10;
+  int dig;
+  int exp = 1;
+  int i = 1;
 
-	n = n / 10;
-	num = n;
+  n = n / 10;
+  num = n;
 
-	if (last < 0)
+  if (last < 0)
+    {
+      _putchar('-');
+      num = -num;
+      n = -n;
+      last = -last;
+      i++;
+    }
+  if (num > 0)
+    {
+      while (num / 10 != 0)
 	{
-		_putchar('-');
-		num = num * -1;
-		n = n * -1;
-		last = last * -1;
-		i++;
+	  exp = exp * 10;
+	  num = num / 10;
 	}
-	if (num > 0)
+      num = n;
+      while (exp > 0)
 	{
-		while (num / 10 != 0)
-		{
-			expo = expo * 10;
-			num = num / 10;
-		}
-		num = n;
-		while (expo > 0)
-		{
-			dig = num / expo;
-			_putchar(dig + '0');
-			num = num - (dig * expo);
-			expo = expo / 10;
-			i++;
-		}
+	  dig = num / exp;
+	  _putchar(dig + '0');
+	  num = num - (dig * exp);
+	  exp = exp / 10;
+	  i++;
 	}
-	_putchar(last + '0');
-	return (i);
+    }
+  _putchar(last + '0');
+
+  return (i);
 }
+
 /**
- * pr_int - Function that prints an integer
- * @int_list: First operand a va list
- * Return: Return an int or 0
+ * p_int - prints integer
+ * @arg: argument to print
+ * Return: number of characters printed
  */
-int pr_int(va_list int_list)
+int p_int(va_list arg)
 {
-	int n = va_arg(int_list, int);
-	int last = n % 10;
-	int expo = 1;
-	int i = 1;
-	int num;
-	int dig;
+  int n = va_arg(arg, int);
+  int num;
+  int last = n % 10;
+  int dig;
+  int exp = 1;
+  int i = 1;
 
-	n = n / 10;
-	num = n;
+  n = n / 10;
+  num = n;
 
-	if (last < 0)
+  if (last < 0)
+    {
+      _putchar('-');
+      num = -num;
+      n = -n;
+      last = -last;
+      i++;
+    }
+  if (num > 0)
+    {
+      while (num / 10 != 0)
 	{
-		_putchar('-');
-		num = num * -1;
-		n = n * -1;
-		last = last * -1;
-		i++;
+	  exp = exp * 10;
+	  num = num / 10;
 	}
-	if (num > 0)
+      num = n;
+      while (exp > 0)
 	{
-		while (num / 10 != 0)
-		{
-			expo = expo * 10;
-			num = num / 10;
-		}
-		num = n;
-		while (expo > 0)
-		{
-			dig = num / expo;
-			_putchar(dig + '0');
-			num = num - (dig * expo);
-			expo = expo / 10;
-			i++;
-		}
+	  dig = num / exp;
+	  _putchar(dig + '0');
+	  num = num - (dig * exp);
+	  exp = exp / 10;
+	  i++;
 	}
-	_putchar(last + '0');
-	return (i);
+    }
+  _putchar(last + '0');
+
+  return (i);
 }
