@@ -1,0 +1,58 @@
+.TH _PRINTF 1 "July 2024" "1.0" "Gerti Bajo and Hans Sora" "Custom printf Implementation"
+.SH NAME
+_printf \- custom implementation of the printf function
+.SH SYNOPSIS
+.B #include "main.h"
+.sp
+.B int _printf(const char *format, ...);
+.SH DESCRIPTION
+.B _printf
+is a custom implementation of the standard C library function
+.BR printf (3).
+It produces output according to a format specified in the
+.IR format
+string.
+
+The
+.I format
+string is a character string containing plain characters and format specifiers. Plain characters are written to standard output, and format specifiers are replaced by the values of corresponding arguments. The function handles the following format specifiers:
+.TP
+.B c
+Prints a single character.
+.TP
+.B s
+Prints a string of characters.
+.TP
+.B %
+Prints a literal percent sign.
+.TP
+.B d, i
+Prints a signed integer in decimal notation.
+
+If the format specifier is not recognized, the function prints the percent sign followed by the unrecognized specifier.
+
+.SH RETURN VALUE
+.B _printf
+returns the number of characters printed (excluding the terminating null byte for strings). If the format string is NULL, the function returns \-1.
+
+.SH EXAMPLES
+The following code demonstrates the usage of
+.B _printf:
+.nf
+#include "main.h"
+
+int main(void)
+{
+    _printf("Character: %c\n", 'A');
+    _printf("String: %s\n", "Hello, World!");
+    _printf("Percent: %%\n");
+    _printf("Integer: %d\n", 123);
+    return (0);
+}
+.fi
+
+.SH SEE ALSO
+.BR printf (3)
+
+.SH AUTHOR
+Gerti Bajo and Hans Sora
