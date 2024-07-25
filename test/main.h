@@ -21,3 +21,4 @@ int pr_decimal(va_list decimal_list);
 int pr_string(va_list string_list);
 
 #endif
+
