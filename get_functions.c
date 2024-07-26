@@ -3,7 +3,7 @@
 
 /**
  * check_formats - checks for specifier
- * @format: specifier
+ * @format: specifie
  * Return: Pointer to function or NULL
  */
 
