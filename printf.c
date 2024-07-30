@@ -3,7 +3,7 @@
 
 /**
  * _printf - Function that prints with a format
- * @format: format passed 
+ * @format: format passed
  * Return: Number of characters printed
  */
 
